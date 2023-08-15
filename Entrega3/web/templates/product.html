@@ -1,0 +1,88 @@
+<doctype html>
+    <title>Products</title>
+    <body style= "padding:20px">
+        <style>
+            h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color:rgb(15, 14, 14);
+            }
+            button {
+            background-color: #f697d5c1;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-right: 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            }
+            button:hover{
+                background-color: #8b54fa;
+            }
+            #menu td, #menu th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            }
+            
+            #menu tr:nth-child(even){background-color: #f2f2f2;}
+    
+            #menu tr:hover {background-color: #ddd;}
+    
+            #menu th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: rgb(161, 62, 184);
+            color: white;
+            }
+            </style>
+        <h1>Product Menu</h1>
+        
+        <div id="tabela">
+            <button onclick="window.location.href='/'">Back</button>
+            <button onclick="window.location.href='/product/insert_product'">Register product</button>
+            {% for product in products %}
+                <article class="post">
+                    <header>
+                        <div>
+                        <h1>{{ product['name'] }}</h1>
+                        <div class="about"> {{ product['name'] }}</div>
+                        <div class="about"> sku: {{ product['sku'] }}</div>
+                        <div class="about"> desc: {{ product['description'] }}</div>
+                        {% if product['ean'] != None %}
+                            <div class="about"> ean: {{ product['ean'] }}</div>
+                        {% endif %}
+                        </div>
+                        <a class="action" href="{{ url_for('product_price_update', SKU = product['sku'])}}"> change product price</a>
+                        <a class="action" href="{{ url_for('product_description_update', SKU = product['sku'])}}"> change product description</a>
+                        <a class="action" href="{{ url_for('product_delete', SKU = product['sku'])}}"> remove product </a>
+                    </header>
+                    </header>
+                    <p class="body">€ {{ product['price'] }}</p>
+                    </article>
+                    {% if not loop.last %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td> {{ record[1] }} </td>
+            <td> {{ record[2] }} </td>
+            <td> {{ record[3] }} </td>
+            <td> {{ record[4] }} </td>
+            <td><a href= "product/remove?SKU={{ record[0]}}&name={{ record[1]}}&description={{ record[2]}}&price={{ record[3]}}&ean={{ record[4]}}"> Remove </a></td >
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+    </body>
+    </doctype>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>

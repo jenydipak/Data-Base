@@ -1,0 +1,47 @@
+
+<div class="checkout-panel">
+  <h1>Please fill the payment info</h1>
+  <form action="execute_payment">
+    <div class="panel-body">
+      <h2 class="title">Choose your payment-method here!</h2>
+   
+      <style>
+        
+        .payment-logo {
+          width: 100px; 
+          height: auto; 
+        }
+        
+      </style>
+
+      <div class="payment-method">
+        <label for="card" class="method card">
+          <div class="radio-input">
+            <input id="card" type="radio" name="payment" value="card">
+            <img src="https://designmodo.com/demo/checkout-panel/img/visa_logo.png"/>   
+          </div>
+        </label>
+   
+        <label for="paypal" class="method paypal">
+          <div class="radio-input">
+            <input id="paypal" type="radio" name="payment" value="paypal">
+            <img src="https://designmodo.com/demo/checkout-panel/img/paypal_logo.png"/>
+          </div>
+        </label>
+
+        <label for="mbway" class="method mbway">
+            <div class="radio-input">
+              <input id="mbway" type="radio" name="payment" value="mbway">
+              <img class="payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Logo_MBWay.svg"/>
+              
+            </div>
+          </label>
+      </div>
+    </div>
+   
+    <div class="panel-footer">
+      <button onclick="window.location.href='/orders'" class="btn back-btn">Back</button>
+      <button onclick="window.location.href='/orders/execute_payment'" class="btn next-btn">Next Step</button>
+    </div>
+  </form>
+  </div>

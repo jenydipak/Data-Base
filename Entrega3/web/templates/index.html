@@ -1,0 +1,50 @@
+<doctype html>
+    <title>Menu - Flask</title>
+    <body style="padding:20px">
+      <style>
+        #menu {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        background-color: whitesmoke;
+        }
+        h1{
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        #menu td, #menu th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+        a:link, a:visited ,a:hover, a:active{
+        text-decoration: none;
+        color: black;
+        }
+        #menu tr:nth-child(even){background-color: #f2f2f2;}
+
+        #menu tr:hover {background-color: #ddd;}
+
+        th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgb(131, 70, 151);
+        color: white;
+        }
+    </style>
+    <table id="menu">
+      <thead>
+        <tr>
+        <th>Menu</th>
+        </tr>
+      </thead>
+      <tbody>      
+        <tr><td><a href="{{url_for('product_index')}}">Manage Products</a></td></tr>
+        <tr><td><a href="{{url_for('supplier_index')}}">Manage Suppliers</a></td></tr>
+        <tr><td><a href="{{url_for('client_index')}}">Manage Clients</a></td></tr>
+        <tr><td><a href="{{url_for('start_order')}}">Make Orders</a></td></tr>
+      </tbody>
+    </table>
+  </body>
+</doctype>
+    

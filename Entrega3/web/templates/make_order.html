@@ -1,0 +1,82 @@
+<doctype html>
+    <title>Make Order</title>
+    <body style= "padding:20px">
+        <style>
+        h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        color:rgb(12, 12, 12);
+        }
+        button {
+        background-color: #f697d5c1;
+        border: none;
+        color: white;
+        padding: 10px;
+        margin-bottom: 20px;
+        margin-right: 1em;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        }
+        button:hover{
+            background-color: #8b54fa;
+        }
+        #menu td, #menu th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+        
+        #menu tr:nth-child(even){background-color: #f2f2f2;}
+
+        #menu tr:hover {background-color: #ddd;}
+
+        #menu th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgb(161, 62, 184);
+        color: white;
+        }
+        </style>
+        <h1>Make Order</h1>
+        <div id = "tabela">
+        <button onclick="window.location.href='/orders'">Back</button>
+        {% for product in orders %}
+        <article class="post">
+            <header>
+                <div>
+                <h1>{{ product['name'] }}</h1>
+                <div class="about"> {{ product['name'] }}</div>
+                <div class="about"> SKU: {{ product['sku'] }}</div>
+                <div class="about"> description: {{ product['description'] }}</div>
+                {% if product['ean'] != None %}
+                    <div class="about"> ean: {{ product['ean'] }}</div>
+                {% endif %}
+                </div>
+                <a class="action" href="{{ url_for('choose_quantity', SKU = product['sku'], order_no = order_no, cust_no = cust_no, date = date)}}"> Select </a> 
+            </header>
+        </article>
+            {% if not loop.last %}
+            <hr>
+            {% endif %}
+            {% endfor %}
+            </thead>
+            {% for record in cursor %}
+            <tr>
+                <td> {{ record[0] }} </td>
+                <td> {{ record[1] }} </td>
+                <td> {{ record[2] }} </td>
+                <td> {{ record[3] }} </td>
+            </tr>
+            {% endfor %}
+        </div>
+        <div>
+        <a class="action" href="{{ url_for('payment_method', order_no = order_no, cust_no = cust_no)}}"> Pay Order </a> 
+    </div>
+    </body>
+    </doctype>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
