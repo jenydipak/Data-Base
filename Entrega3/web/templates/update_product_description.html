@@ -1,0 +1,13 @@
+
+{% block header %}
+  <h1>{% block title %}Products {{ product['SKU'] }} | Edit{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="description">Description</label>
+    <input name="description" id="description" type="text" placeholder="add new description" value="{{ request.form['description'] or product['description'] }}" required>
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+{% endblock %}

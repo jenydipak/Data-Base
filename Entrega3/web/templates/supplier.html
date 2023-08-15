@@ -1,0 +1,85 @@
+<doctype html>
+    <title>Suppliers</title>
+    <body style= "padding:20px">
+        <style>
+            h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color:rgb(34, 32, 32);
+            }
+            button {
+            background-color: #b95dcfb4;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-right: 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            }
+            button:hover{
+                background-color: #8b54fa;
+            }
+            #menu td, #menu th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            }
+            
+            #menu tr:nth-child(even){background-color: #f2f2f2;}
+    
+            #menu tr:hover {background-color: #ddd;}
+    
+            #menu th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: rgb(161, 62, 184);
+            color: white;
+            }
+            </style>
+        <h1>Supplier Menu</h1>
+        
+        <div id="tabela">
+            <button onclick="window.location.href='/'">Back</button>
+            <button onclick="window.location.href='supplier/insert_supplier'">Register suplier</button>
+            {% for supplier in suppliers %}
+            <article class="post">
+                <header>
+                    <div>
+                    <h1>{{ supplier['TIN'] }}</h1>
+                    <div class="about"> {{ supplier['TIN'] }}</div>
+                    <div class="about"> name: {{ supplier['name'] }}</div>
+                    <div class="about"> address: {{ supplier['address'] }}</div>
+                    <div class="about"> SKU: {{ supplier['sku'] }}</div>
+                    <div class="about"> date: {{ supplier['date'] }}</div>
+                    </div>
+                    <a class="action" href="{{ url_for('supplier_delete', TIN = supplier['tin'])}}"> remove supplier </a>
+                </header>
+                </article>
+                {% if not loop.last %}
+                <hr>
+            {% endif %}
+            {% endfor %}
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td> {{ record[1] }} </td>
+            <td> {{ record[2] }} </td>
+            <td> {{ record[3] }} </td>
+            <td> {{ record[4] }} </td>
+            <td><a href= "supplier/remove?TIN={{ record[0]}}&name={{ record[1]}}&adress={{ record[2]}}&SKU={{ record[3]}}&date={{ record[4]}}"> Remove </a></td >
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+    
+        <p> Erro: data base load failed </p>
+       
+    </body>
+    </doctype>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>

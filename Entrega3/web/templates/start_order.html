@@ -1,0 +1,55 @@
+<body style= "padding:20px">
+  <style>
+button {
+  background-color: #f697d5c1;
+  border: none;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  }
+</style>
+{% block header %}
+  <button onclick="window.location.href='/'">Back</button>
+  <h1>Choose the order and customer number and order date</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="list_products" method="get">
+    <label for="order_no">Order number</label>
+    <input name="order_no" id="order_no" type="number" placeholder="choose order number" value="{{ request.form['order_no']}}" required>
+    <label for="cust_no">Customer number</label>
+    <input name="cust_no" id="cust_no" type="number" placeholder="choose customer number" value="{{ request.form['cust_no']}}" required>
+    <label for="date">Order date</label>
+    <input name="date" id="date" type="date" placeholder="choose order date" value="{{ request.form['date']}}" required>
+    <input type="submit" value="Next">
+  </form>
+  <hr>
+  {% for order in orders %}
+    <article class="post">
+      <header>
+      <div>
+        <h1>Order number: {{ order['order_no'] }}</h1>
+        <div class="about"> {{ order['order_no'] }}</div>
+        <div class="about"> cust_no: {{ order['cust_no'] }}</div>
+        <div class="about"> date: {{ order['date'] }}</div>
+      </div>
+      </header>
+    </article>
+    {% if not loop.last %}
+    <hr>
+    {% endif %}
+  {% endfor %}
+  </thead>
+  {% for record in cursor %}
+    <tr>
+    <td> {{ record[0] }} </td>
+    <td> {{ record[1] }} </td>
+    <td> {{ record[2] }} </td>
+    </tr>
+  {% endfor %}        
+{% endblock %}

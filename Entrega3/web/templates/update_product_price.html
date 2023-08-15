@@ -1,0 +1,13 @@
+
+{% block header %}
+  <h1>{% block title %}Products {{ product['SKU'] }} | Edit{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="update_product_price" method="post">
+    <label for="price">Price</label>
+    <input name="price" id="price" type="number" step=0.01 value="{{ request.form['price'] or product['price'] }}" required>
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+{% endblock %}
